@@ -4,7 +4,7 @@ import './ExpenseForm.css';
 const ExpenseForm = ({ onSaveExpenseData, open }) => {
   const [inputValues, setinputValues] = useState({
     title: '',
-    amount: '',
+    amount: 0,
     date: '',
   });
 
