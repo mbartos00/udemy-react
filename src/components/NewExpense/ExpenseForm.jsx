@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-function ExpenseForm({ onSaveExpenseData }) {
+const ExpenseForm = ({ onSaveExpenseData, open }) => {
   const [inputValues, setinputValues] = useState({
     title: '',
     amount: '',
     date: '',
   });
+
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    open(false);
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -16,11 +21,16 @@ function ExpenseForm({ onSaveExpenseData }) {
       date,
     };
     onSaveExpenseData(expenseData);
+    open(false);
+
     setinputValues({ title: '', amount: '', date: '' });
   };
 
   const handleInputChange = (e) => {
-    setinputValues((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setinputValues((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
   };
   return (
     <form onSubmit={handleFormSubmit}>
@@ -58,10 +68,11 @@ function ExpenseForm({ onSaveExpenseData }) {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button onClick={handleCancelClick}>Cancel</button>
         <button>Add Expense</button>
       </div>
     </form>
   );
-}
+};
 
 export default ExpenseForm;
