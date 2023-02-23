@@ -57,6 +57,9 @@ export const cartReducer = (state, action) => {
       totalAmount: newItems.length !== 0 ? newAmount : 0,
     };
   }
+  if (action.type === 'CLEAR') {
+    return INITIAL_CART_STATE;
+  }
 
   return INITIAL_CART_STATE;
 };
